@@ -1,0 +1,414 @@
+@use "base"as base;
+
+// 変数ここから
+$main-color: #333333;
+$sub-color: #AB951D;
+
+// ブレイクポイント
+@mixin pc {
+    @media (min-width: 960px) {
+        @content;
+    }
+}
+
+// コンテンツここから
+
+.mb-3{
+    margin-bottom: 3rem;
+}
+.pc-center{
+    @include pc{
+        text-align: center;
+    }
+}
+
+.title_vertical{
+    font-family: 'Andada Pro', serif;
+    font-size: 2rem;
+    align-items: center; 
+    display: flex; 
+    justify-content: center; 
+    transform: rotate(90deg);
+    margin-top: 6rem;
+    margin-left: -2rem;
+
+    @include pc{
+        font-size: 32px;
+    }
+
+    &::before{
+        background-color: $main-color; /* 横線の色 */
+        content: "";
+        height: 1px; /* 横線の高さ */
+        width: 50px; /* 横線の長さ */
+        margin-right: 15px; /* 文字との余白 */
+
+        @include pc{
+            width: 100px; /* 横線の長さ */
+        }
+    }
+}
+.title_horizontal{
+    font-family: 'Andada Pro', serif;
+    font-size: 2rem;
+    align-items: center; 
+    display: flex; 
+    justify-content: center; 
+    @include pc{
+        font-size: 32px;
+    }
+    &::before,&::after{
+        background-color: $main-color; /* 横線の色 */
+        content: "";
+        height: 1px; /* 横線の高さ */
+        width: 100px; /* 横線の長さ */
+    }
+
+    &::before{
+        margin-right: 15px; /* 文字との余白 */
+
+    }
+    &::after{
+        margin-left: 15px; /* 文字との余白 */
+    }
+
+}
+
+
+.title_sub{
+    font-size: 2.2rem;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    @include pc{
+        font-size: 36px;
+    }
+}
+.title_ja{
+    font-size: 2.4rem;
+    text-align: center;
+    padding: 1rem 0 3rem;
+    @include pc{
+        font-size: 36px;
+        padding: 20px 0 70px;
+    }
+}
+.text_main{
+    font-size: 1.4rem;
+    line-height: 2;
+    @include pc{
+        font-size: 18px;
+    }
+
+}
+.btn_link{
+    display: block;
+    background: url(../images/circle.svg) no-repeat left center;
+    line-height: 4rem;
+    padding-left: 2rem;
+    transition: 0.3s;
+
+    @include pc{
+        font-size: 16px;
+        padding-left: 25px;
+    }
+    &:hover{
+        opacity: 0.5;
+    }
+}
+
+/* アニメーション */
+@keyframes fuwafuwa {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-7px);
+    }
+  }
+  
+  .anime-fuwafuwa {
+    animation: 2s fuwafuwa infinite;
+  }
+
+
+  /***dlボタン（SP）ここから***/
+#dl_sp {
+    opacity: 0;
+    position: fixed;
+    bottom: 0;
+    z-index: 970;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition-duration: .3s;
+    transform: translate(0, 100px);
+
+    ul {
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+        margin: auto;
+        align-items: center;
+        list-style-type: none;
+        padding: 1rem 0;
+
+        li {
+            width: 44%;
+
+            &:last-of-type {
+                width: 54%;
+            }
+        }
+    }
+    &.is-scrollIn{
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+
+/***dlボタン（SP）ここまで***/
+
+/***dlボタン（PC）ここから***/
+#dl_pc {
+    opacity: 0;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 970;
+    width: 263px;
+    transition-duration: .3s;
+    transform: translate(0, 100px);
+
+    
+    &.is-scrollIn{
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    dt {
+        background: $sub-color;
+        color: #fff;
+        font-size: 18px;
+        text-align: center;
+        padding: 10px 0;
+        cursor: pointer;
+
+        &::after {
+            border-right: solid 2px #fff;
+            border-top: solid 2px #fff;
+            content: "";
+            display: block;
+            height: 8px;
+            position: absolute;
+            right: 10px;
+            top: 15px;
+            transform: rotate(135deg);
+            transition: transform .3s ease-in-out, top .3s ease-in-out;
+            width: 8px;
+
+        }
+
+        &.open {}
+
+        &.open::after {
+            top: 45% !important;
+            transform: rotate(-45deg) !important;
+        }
+    }
+
+    dd {
+        background-color: rgba(255, 255, 255, 0.8);
+        &.close{
+            display: none;
+             }
+    }
+
+    .qr_group {
+        list-style-type: none;
+        padding: 20px;
+
+        .mb20 {
+            margin-bottom: 15px;
+        }
+    }
+
+
+    .qr_each {
+        display: flex;
+        list-style-type: none;
+        justify-content: center;
+        align-items: center;
+
+        li {
+            &:first-of-type {
+                padding-right: 15px;
+
+                img {
+                    width: 60px;
+                }
+            }
+        }
+
+        li {
+            &:last-of-type {
+                img {
+                    width: 150px;
+                }
+            }
+        }
+    }
+}
+
+/***dlボタン（PC）ここまで***/
+
+/***ハンバーガーここから***/
+ハンバーガー #navBtn {
+    position: fixed;
+    z-index: 1000;
+}
+
+.cp_hmenuac03 .cp_bar,
+.cp_hmenuac03:before,
+.cp_hmenuac03:after {
+    display: block;
+    width: 30px;
+    height: 2px;
+    content: '';
+    transition: all 0.2s ease-in-out;
+    background: $sub-color;
+}
+
+.cp_hmenuac03 .cp_bar {
+    position: relative;
+    margin: 7px 0;
+}
+
+.cp_hmenuac03 {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    top: 1rem;
+    right: 1.5rem;
+    z-index: 100;
+}
+
+#navMenu {
+    height: 0;
+}
+
+#navMenu nav {
+    background: rgba(0, 0, 0, 0.0);
+}
+
+#navMenu.show nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    background: $sub-color;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 40%, 40%;
+    background-position: left top, right bottom;
+    z-index: 99;
+    transition: 0.2s;
+}
+
+#navMenu.show nav ul {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#navMenu nav ul {
+    display: none;
+}
+
+#navMenu nav ul li {
+    display: inline-block;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.4rem;
+    padding: 2rem 0;
+
+    &:last-of-type {
+        padding-top: 1rem;
+
+        img {
+            width: 50%;
+        }
+    }
+}
+
+#navMenu nav ul li:last-of-type {
+    border: 0;
+}
+
+#navMenu nav ul li a {
+    color: inherit;
+    display: block;
+    transition: 0.3s;
+}
+
+#navMenu nav ul li a:hover {
+    // color: #fff;
+    text-decoration: none;
+    opacity: 0.4;
+}
+
+.show .cp_hmenuac03 .cp_bar {
+    transform: scale(0);
+}
+
+.show .cp_hmenuac03:before {
+    transform: translateY(10px) rotate(135deg);
+    background-color: #fff;
+}
+
+.show .cp_hmenuac03:after {
+    transform: translateY(-8px) rotate(-135deg);
+    background-color: #fff;
+}
+/***ハンバーガーここまで***/
+
+/***トップへ戻るここから***/
+#page_top {
+    margin: auto;
+    width: 4rem;
+    height: 4rem;
+}
+
+#page_top a {
+    position: relative;
+    display: block;
+    width: 4rem;
+    height: 4rem;
+}
+
+#page_top a::before {
+    font-family: FontAwesome;
+    content: '\f077';
+    font-weight: 900;
+    font-size: 25px;
+    color: $main-color;
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    text-align: center;
+}
+
+/***トップへ戻るここまで***/

@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+
+// 変数ここから
+$main-color: #333333;
+$sub-color: #AB951D;
+
+
+// 基本設定
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    color: $main-color;
+    font-size: 1.4rem;
+}
+
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.sp {
+    display: block;
+}
+
+.pc {
+    display: none;
+}
+
+.inner {
+    width: 90%;
+    margin: auto;
+}
+
+@media (min-width: 480px) {
+    html {
+        font-size: 68.75%;
+    }
+
+}
+
+@media (min-width: 640px) {
+    html {
+        font-size: 75%;
+        font-size: 100%;
+    }
+}
+
+@media (min-width: 960px) {
+    html {
+        font-size: 93.75%;
+    }
+    body {
+        font-size: 18px;
+    }
+
+    .sp {
+        display: none;
+    }
+
+    .pc {
+        display: block;
+    }
+
+    .inner {
+        max-width: 1300px;
+        margin: auto;
+    }
+
+}
+
+
+
+
